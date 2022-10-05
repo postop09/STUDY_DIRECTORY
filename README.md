@@ -1,1 +1,1 @@
-# react-study
+# study-list
