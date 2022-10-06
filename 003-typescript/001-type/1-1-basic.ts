@@ -31,7 +31,7 @@
     }
 
     // ❗ null (보편적으로 undefined 를 많이 사용한다. 하지만 의미상 null 이 적절한 경우도 있다.)
-    let person: string | undefined;
+    let person: string | null;
     person = "SIK";
 
     // ❗ unknown (되도록이면 사용하지 않는 것이 좋다.)
