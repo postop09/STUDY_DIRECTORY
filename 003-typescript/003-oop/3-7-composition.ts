@@ -1,9 +1,49 @@
 {
-    // 상속보다 composition
+    /**
+     * 너무 깊은 상속 보다는 composition 을 활용하는 것이 더 좋다.
+     */
     type CoffeeCup = {
         shots: number;
         hasMilk?: boolean;
-        hasSugar? : boolean;
+        hasSugar?: boolean;
+    };
+
+    interface MilkFrother {
+        makeMilk(cup: CoffeeCup): CoffeeCup;
+    }
+
+    interface SugarSource {
+        addSugar(cup: CoffeeCup): CoffeeCup;
+    }
+
+    class CheapMilkSteamer implements MilkFrother {
+        makeMilk(cup: CoffeeCup): CoffeeCup {
+            console.log(`Steaming some milk🥛...`);
+            return {
+                ...cup,
+                hasMilk: true,
+            };
+        }
+    }
+
+    class FancyMilkSteamer implements MilkFrother {
+        makeMilk(cup: CoffeeCup): CoffeeCup {
+            console.log(`Fancy!!!! Steaming some milk🥛...`);
+            return {
+                ...cup,
+                hasMilk: true,
+            };
+        }
+    }
+
+    class AutomaticSugarMixer implements SugarSource {
+        addSugar(cuppa: CoffeeCup): CoffeeCup {
+            console.log(`Adding sugar...`);
+            return {
+                ...cuppa,
+                hasSugar: true,
+            };
+        }
     }
 
     interface CoffeeMaker {
@@ -11,8 +51,8 @@
     }
 
     class CoffeeMachine implements CoffeeMaker {
-        private static BEANS_GRAM_PER_SHOT: number = 7;
-        protected coffeeBeans: number = 0;
+        private static BEANS_GRAMM_PER_SHOT: number = 7; // class level
+        private coffeeBeans: number = 0; // instance (object) level
 
         constructor(coffeeBeans: number) {
             this.coffeeBeans = coffeeBeans;
@@ -24,44 +64,48 @@
 
         fillCoffeeBeans(beans: number) {
             if (beans < 0) {
-                throw new Error("value for beans should be greater than 0.")
+                throw new Error('value for beans should be greater than 0');
             }
             this.coffeeBeans += beans;
         }
 
         clean() {
-            console.log("cleaning the machine...");
+            console.log('cleaning the machine...🧼');
         }
 
-        grindBeans(shots) {
+        private grindBeans(shots: number) {
             console.log(`grinding beans for ${shots}`);
-            if (this.coffeeBeans < shots * CoffeeMachine.BEANS_GRAM_PER_SHOT) {
-                throw new Error("not enough coffee beans!");
+            if (this.coffeeBeans < shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT) {
+                throw new Error('Not enough coffee beans!');
             }
-            this.coffeeBeans -= shots * CoffeeMachine.BEANS_GRAM_PER_SHOT;
+            this.coffeeBeans -= shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT;
         }
 
-        preheat() {
-            console.log("heating up...")
+        private preheat(): void {
+            console.log('heating up... 🔥');
         }
 
-        extract(shots) {
+        private extract(shots: number): CoffeeCup {
+            console.log(`Pulling ${shots} shots... ☕️`);
             return {
                 shots,
                 hasMilk: false,
             };
         }
 
-        makeCoffee(shots: number): CoffeeCup{
+        makeCoffee(shots: number): CoffeeCup {
             this.grindBeans(shots);
             this.preheat();
-            return this.extract(shots)
+            return this.extract(shots);
         }
     }
 
-    class LatteMachine extends CoffeeMachine {
-        private steamMilk() {
-            console.log("steaming some milk...")
+    class CaffeLatteMachine extends CoffeeMachine {
+        constructor(beans: number, public readonly serialNumber: string) {
+            super(beans);
+        }
+        private steamMilk(): void {
+            console.log('Steaming some milk... 🥛');
         }
         makeCoffee(shots: number): CoffeeCup {
             const coffee = super.makeCoffee(shots);
@@ -69,7 +113,7 @@
             return {
                 ...coffee,
                 hasMilk: true,
-            }
+            };
         }
     }
 
@@ -79,18 +123,28 @@
             return {
                 ...coffee,
                 hasSugar: true,
-            }
+            };
         }
     }
 
-    const machines = [
-        new CoffeeMachine(16),
-        new LatteMachine(16),
-        new SweetCoffeeMaker(16),
-    ]
-
-    machines.forEach((machine) => {
-        console.log("---------------------");
-        machine.makeCoffee(1);
-    })
+    class SweetCaffeLatteMachine extends CoffeeMachine {
+        constructor(
+            beans: number,
+            private sugar: SugarSource,
+            private milk: MilkFrother,
+        ) {
+            super(beans);
+        }
+        makeCoffee(shots: number): CoffeeCup {
+            const coffee = super.makeCoffee(shots);
+            const milkCoffee = this.milk.makeMilk(coffee);
+            return this.sugar.addSugar(milkCoffee);
+        }
+    }
+    const machine = new SweetCaffeLatteMachine(
+        32,
+        new AutomaticSugarMixer(),
+        new FancyMilkSteamer()
+    );
+    machine.makeCoffee(2);
 }
