@@ -1,17 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useState } from "react";
 
 export default function App() {
+  const [working, setWorking] = useState(false);
+  const [text, setText] = useState("");
+  const [toDos, setToDos] = useState({});
+  const travel = () => setWorking(false);
+  const work = () => setWorking(true);
+  const changeTxt = (payload: string) => setText(payload);
+  const addToDo = () => {
+    if (!text) return;
+    setText("");
+    alert(text);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <View style={styles.box1}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={work}>
+          <Text
+            style={{ ...styles.btnText, color: working ? "white" : "#444" }}
+          >
+            WORK
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={travel}>
+          <Text
+            style={{ ...styles.btnText, color: !working ? "white" : "#444" }}
+          >
+            TRAVEL
+          </Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.box2}>
-        <Text>안녕 승현아!</Text>
-      </View>
-      <View style={styles.box3}>
-      </View>
+      <TextInput
+        returnKeyType="done"
+        onSubmitEditing={addToDo}
+        placeholder={working ? "Add a To Do" : "Where do U wanna go?"}
+        onChangeText={changeTxt}
+        style={styles.input}
+      ></TextInput>
     </View>
   );
 }
@@ -19,19 +54,22 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#000",
+    paddingHorizontal: 20,
   },
-  box1: {
-    flex: 1,
-    backgroundColor: "coral"
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 100,
   },
-  box2: {
-    flex: 7,
-    backgroundColor: "teal",
-    justifyContent: "center",
-    alignItems: "center",
+  btnText: {
+    color: "white",
+    fontSize: 32,
   },
-  box3: {
-    flex: 1,
-    backgroundColor: "darkred"
+  input: {
+    borderRadius: 30,
+    padding: 20,
+    marginTop: 20,
+    backgroundColor: "white",
   },
 });
