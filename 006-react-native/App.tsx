@@ -54,8 +54,8 @@ export default function App() {
         <Text style={styles.test}>반가워</Text>
         <Text style={styles.test}>내</Text>
         <Text style={styles.test}>이름은</Text>
-        <Text style={styles.test}>조윤식이야</Text>
-        <Text style={styles.test}>승현아</Text>
+        <Text style={styles.test}>ㅇㅇㅇ이야</Text>
+        <Text style={styles.test}>ㅇㅇㅇ</Text>
         <Text style={styles.test}>안녕!</Text>
         <Text style={styles.test}>스크롤 테스트</Text>
         <Text style={styles.test}>스크롤 테스트</Text>
