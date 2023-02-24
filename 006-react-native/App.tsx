@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -47,6 +48,20 @@ export default function App() {
         onChangeText={changeTxt}
         style={styles.input}
       ></TextInput>
+
+      <ScrollView>
+        <Text style={styles.test}>안녕</Text>
+        <Text style={styles.test}>반가워</Text>
+        <Text style={styles.test}>내</Text>
+        <Text style={styles.test}>이름은</Text>
+        <Text style={styles.test}>조윤식이야</Text>
+        <Text style={styles.test}>승현아</Text>
+        <Text style={styles.test}>안녕!</Text>
+        <Text style={styles.test}>스크롤 테스트</Text>
+        <Text style={styles.test}>스크롤 테스트</Text>
+        <Text style={styles.test}>스크롤 테스트</Text>
+        <Text style={styles.test}>스크롤 테스트</Text>
+      </ScrollView>
     </View>
   );
 }
@@ -70,6 +85,15 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     padding: 20,
     marginTop: 20,
+    marginBottom: 30,
     backgroundColor: "white",
+  },
+  test: {
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 20,
+    marginTop: 10,
+    padding: 20,
+    color: "white",
   },
 });
