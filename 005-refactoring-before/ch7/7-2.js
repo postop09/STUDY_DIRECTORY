@@ -11,11 +11,11 @@ export class Person {
   }
 
   get courses() {
-    return this.#courses;
+    return [...this.#courses];
   }
 
-  set courses(courses) {
-    this.#courses = courses;
+  addCourse(course) {
+    this.#courses.push(course);
   }
 }
 
@@ -36,6 +36,6 @@ export class Course {
   }
 }
 
-const ellie = new Person('엘리');
-ellie.courses.push(new Course('리팩토링', true));
+const ellie = new Person("엘리");
+ellie.courses.push(new Course("리팩토링", true));
 console.log(ellie.courses.length);

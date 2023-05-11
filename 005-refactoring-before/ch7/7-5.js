@@ -37,7 +37,10 @@ class Person {
   }
 }
 
-const person = new Person('엘리', '010', '12345678');
+// Telephone Class 를 따로 분리하는 것이 좋아보인다.
+// 한 가지의 클래스는 한가지의 책임을!!
+
+const person = new Person("엘리", "010", "12345678");
 console.log(person.name);
 console.log(person.officeAreaCode);
 console.log(person.officeNumber);
