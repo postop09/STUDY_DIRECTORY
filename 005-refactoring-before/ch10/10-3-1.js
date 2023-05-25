@@ -1,6 +1,6 @@
 export function payAmount(employee) {
   if (employee.isSeparated) {
-    return (result = { amount: 0, reasonCode: "SEP" });
+    return { amount: 0, reasonCode: "SEP" };
   }
 
   if (employee.isRetired) {
