@@ -6,10 +6,10 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import ExcelBtn from "./ExcelBtn.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
-  // const DAY = ["일", "월", "화", "수", "목", "금", "토"];
 
   return (
     <>
@@ -64,6 +64,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <ExcelBtn />
     </>
   );
 }
