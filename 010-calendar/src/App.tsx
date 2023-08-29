@@ -7,6 +7,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import ExcelBtn from "./ExcelBtn.jsx";
+import Dropdown from "tuneit-tds-test/dist/components/Dropdown";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -65,6 +66,10 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <ExcelBtn />
+      <Dropdown
+        dropdownList={[{ code: "PLEASE", codeName: "1" }]}
+        onChange={() => {}}
+      />
     </>
   );
 }
