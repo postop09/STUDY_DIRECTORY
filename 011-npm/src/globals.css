@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: 'Pretendard', sans-serif;
+    font-variant-numeric: tabular-nums;
+}
+
+.child-div-grid > div {
+    display: grid;
+}
+
+.child-dt-dd-nowrap dt,dd {
+    white-space: nowrap;
+}
+
+.tuneit-blue {
+    background-color: rgb(1, 93, 255);
+}
+
+.text-tuneit-blue {
+    color: rgb(1, 93, 255);
+}
+
+.tuneit-red {
+    background-color: rgb(255, 2, 0);
+}
+
+.text-tuneit-red {
+    color: rgb(255, 2, 0);
+}
+
+.tuneit-white {
+    @apply bg-white
+}
+
+.tuneit-blue-active {
+    @apply tuneit-blue hover:bg-blue-700 disabled:bg-blue-400
+}
+
+.tuneit-red-active {
+    @apply tuneit-red hover:bg-red-600 disabled:bg-red-400
+}
+
+.tuneit-white-active {
+    @apply hover:bg-gray-50 disabled:bg-gray-200 text-black bg-white border disabled:text-gray-500
+}
+
+.scroll-hidden {
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+}
+
+.scroll-hidden::-webkit-scrollbar {
+    display: none;
+}

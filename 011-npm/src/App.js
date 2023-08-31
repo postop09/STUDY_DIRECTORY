@@ -1,26 +1,10 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { TButton } from "yun-test-comp";
-import { Button } from "tuneit-tds-test/dist/components";
+import { Footer } from "tuneit-tds";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <TButton>HIRE</TButton>
-        <Button>TEST</Button>
+        <Footer snsList={[{ src: "", alt: "", href: "" }]} />
       </header>
     </div>
   );
